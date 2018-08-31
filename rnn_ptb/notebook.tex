@@ -1,0 +1,697 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ptb\_word}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{pylab}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{o}{\PYZpc{}}\PY{k}{load\PYZus{}ext} watermark
+        \PY{o}{\PYZpc{}}\PY{k}{watermark} \PYZhy{}v \PYZhy{}m \PYZhy{}p numpy,tensorflow
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using matplotlib backend: Qt5Agg
+Populating the interactive namespace from numpy and matplotlib
+CPython 3.5.5
+IPython 6.4.0
+
+numpy 1.14.5
+tensorflow 1.9.0
+
+compiler   : GCC 7.2.0
+system     : Linux
+release    : 4.13.0-45-generic
+machine    : x86\_64
+processor  : x86\_64
+CPU cores  : 4
+interpreter: 64bit
+
+    \end{Verbatim}
+
+    텐서플로 1.7.0 버전에서부터는 샘플 데이터를 다운로드하는 기능이 제외될
+예정이라는 경고가 발생합니다. 경고를 무시하기 위해 로깅 설정을
+변경합니다.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+        \PY{n}{tf}\PY{o}{.}\PY{n}{logging}\PY{o}{.}\PY{n}{set\PYZus{}verbosity}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{logging}\PY{o}{.}\PY{n}{ERROR}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+        \PY{k+kn}{from} \PY{n+nn}{tensorflow}\PY{n+nn}{.}\PY{n+nn}{contrib}\PY{n+nn}{.}\PY{n+nn}{rnn} \PY{k}{import} \PY{n}{BasicLSTMCell}\PY{p}{,} \PY{n}{MultiRNNCell}\PY{p}{,} \PY{n}{DropoutWrapper}
+        
+        \PY{k+kn}{import} \PY{n+nn}{reader}
+\end{Verbatim}
+
+
+    Small Config 정보를 사용합니다.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{class} \PY{n+nc}{SmallConfig}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Small config.\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{init\PYZus{}scale} \PY{o}{=} \PY{l+m+mf}{0.1}
+            \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{1.0}
+            \PY{n}{max\PYZus{}grad\PYZus{}norm} \PY{o}{=} \PY{l+m+mi}{5}
+            \PY{n}{num\PYZus{}layers} \PY{o}{=} \PY{l+m+mi}{2}
+            \PY{n}{num\PYZus{}steps} \PY{o}{=} \PY{l+m+mi}{20}
+            \PY{n}{hidden\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{200}
+            \PY{n}{max\PYZus{}epoch} \PY{o}{=} \PY{l+m+mi}{4}
+            \PY{n}{max\PYZus{}max\PYZus{}epoch} \PY{o}{=} \PY{l+m+mi}{13}
+            \PY{n}{keep\PYZus{}prob} \PY{o}{=} \PY{l+m+mf}{1.0}
+            \PY{n}{lr\PYZus{}decay} \PY{o}{=} \PY{l+m+mf}{0.5}
+            \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{20}
+            \PY{n}{vocab\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{10000}
+\end{Verbatim}
+
+
+    트레이닝과 테스트에 사용할 두개의 config 오브젝트를 만듭니다.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{config} \PY{o}{=} \PY{n}{SmallConfig}\PY{p}{(}\PY{p}{)}
+        \PY{n}{eval\PYZus{}config} \PY{o}{=} \PY{n}{SmallConfig}\PY{p}{(}\PY{p}{)}
+        \PY{n}{eval\PYZus{}config}\PY{o}{.}\PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{eval\PYZus{}config}\PY{o}{.}\PY{n}{num\PYZus{}steps} \PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    PTB 모델을 만들어 주는 클래스를 작성합니다.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{class} \PY{n+nc}{PTBModel}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}The PTB model.\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{config}\PY{p}{,} \PY{n}{is\PYZus{}training}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{n}{config}\PY{o}{.}\PY{n}{batch\PYZus{}size}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}steps} \PY{o}{=} \PY{n}{config}\PY{o}{.}\PY{n}{num\PYZus{}steps}
+                \PY{n}{input\PYZus{}size} \PY{o}{=} \PY{p}{[}\PY{n}{config}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}data} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{n}{input\PYZus{}size}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{targets} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{n}{input\PYZus{}size}\PY{p}{)}
+        
+                \PY{n}{lstm\PYZus{}fn} \PY{o}{=} \PY{k}{lambda}\PY{p}{:} \PY{n}{BasicLSTMCell}\PY{p}{(}\PY{n}{config}\PY{o}{.}\PY{n}{hidden\PYZus{}size}\PY{p}{,} \PY{n}{forget\PYZus{}bias}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{state\PYZus{}is\PYZus{}tuple}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} 
+                                                \PY{n}{reuse}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{get\PYZus{}variable\PYZus{}scope}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reuse}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} SmallConfig에서는 드롭아웃이 적용되지 않습니다.}
+                \PY{k}{if} \PY{n}{is\PYZus{}training} \PY{o+ow}{and} \PY{n}{config}\PY{o}{.}\PY{n}{keep\PYZus{}prob} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{lstm\PYZus{}fn} \PY{o}{=} \PY{k}{lambda}\PY{p}{:} \PY{n}{DropoutWrapper}\PY{p}{(}\PY{n}{lstm\PYZus{}fn}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{keep\PYZus{}prob}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} 두개의 계층을 가진 신경망 구조를 만듭니다.}
+                \PY{n}{cell} \PY{o}{=} \PY{n}{MultiRNNCell}\PY{p}{(}\PY{p}{[}\PY{n}{lstm\PYZus{}fn}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{config}\PY{o}{.}\PY{n}{num\PYZus{}layers}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{state\PYZus{}is\PYZus{}tuple}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{initial\PYZus{}state} \PY{o}{=} \PY{n}{cell}\PY{o}{.}\PY{n}{zero\PYZus{}state}\PY{p}{(}\PY{n}{config}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+        
+                \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{device}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/cpu:0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{embedding\PYZus{}size} \PY{o}{=} \PY{p}{[}\PY{n}{config}\PY{o}{.}\PY{n}{vocab\PYZus{}size}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{hidden\PYZus{}size}\PY{p}{]}
+                    \PY{n}{embedding} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{get\PYZus{}variable}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{embedding}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{embedding\PYZus{}size}\PY{p}{)}
+                    \PY{n}{inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{embedding\PYZus{}lookup}\PY{p}{(}\PY{n}{embedding}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}data}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} SmallConfig에서는 드롭아웃이 적용되지 않습니다.}
+                \PY{k}{if} \PY{n}{is\PYZus{}training} \PY{o+ow}{and} \PY{n}{config}\PY{o}{.}\PY{n}{keep\PYZus{}prob} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n}{inputs}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{keep\PYZus{}prob}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} 각 배치마다 순서대로 데이터를 뽑아 셀에 입력합니다. }
+                \PY{n}{outputs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{state} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{initial\PYZus{}state}
+                \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RNN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{time\PYZus{}step} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{config}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{if} \PY{n}{time\PYZus{}step} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:} \PY{n}{tf}\PY{o}{.}\PY{n}{get\PYZus{}variable\PYZus{}scope}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reuse\PYZus{}variables}\PY{p}{(}\PY{p}{)}
+                        \PY{p}{(}\PY{n}{cell\PYZus{}output}\PY{p}{,} \PY{n}{state}\PY{p}{)} \PY{o}{=} \PY{n}{cell}\PY{p}{(}\PY{n}{inputs}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{time\PYZus{}step}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{state}\PY{p}{)}
+                        \PY{n}{outputs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cell\PYZus{}output}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} output의 크기를 20x20x200에서 400x200으로 변경합니다.}
+                \PY{n}{output} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{outputs}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{hidden\PYZus{}size}\PY{p}{]}\PY{p}{)}
+                \PY{n}{softmax\PYZus{}w\PYZus{}size} \PY{o}{=} \PY{p}{[}\PY{n}{config}\PY{o}{.}\PY{n}{hidden\PYZus{}size}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{vocab\PYZus{}size}\PY{p}{]}
+                \PY{n}{softmax\PYZus{}w} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{get\PYZus{}variable}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{softmax\PYZus{}w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{softmax\PYZus{}w\PYZus{}size}\PY{p}{)}
+                \PY{n}{softmax\PYZus{}b} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{get\PYZus{}variable}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{softmax\PYZus{}b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{[}\PY{n}{config}\PY{o}{.}\PY{n}{vocab\PYZus{}size}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} logits의 크기는 400x10000이 됩니다.}
+                \PY{n}{logits} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{output}\PY{p}{,} \PY{n}{softmax\PYZus{}w}\PY{p}{)} \PY{o}{+} \PY{n}{softmax\PYZus{}b}
+            
+                \PY{n}{loss} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{contrib}\PY{o}{.}\PY{n}{legacy\PYZus{}seq2seq}\PY{o}{.}\PY{n}{sequence\PYZus{}loss\PYZus{}by\PYZus{}example}\PY{p}{(}
+                    \PY{p}{[}\PY{n}{logits}\PY{p}{]}\PY{p}{,}
+                    \PY{p}{[}\PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{targets}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,}
+                    \PY{p}{[}\PY{n}{tf}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{[}\PY{n}{config}\PY{o}{.}\PY{n}{batch\PYZus{}size} \PY{o}{*} \PY{n}{config}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cost} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}sum}\PY{p}{(}\PY{n}{loss}\PY{p}{)} \PY{o}{/} \PY{n}{config}\PY{o}{.}\PY{n}{batch\PYZus{}size}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{final\PYZus{}state} \PY{o}{=} \PY{n}{state}
+        
+                \PY{k}{if} \PY{o+ow}{not} \PY{n}{is\PYZus{}training}\PY{p}{:}
+                    \PY{k}{return}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lr} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{trainable}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+                \PY{n}{tvars} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{trainable\PYZus{}variables}\PY{p}{(}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} 기울기 클리핑을 수행합니다.}
+                \PY{n}{grads}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{clip\PYZus{}by\PYZus{}global\PYZus{}norm}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{gradients}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cost}\PY{p}{,} \PY{n}{tvars}\PY{p}{)}\PY{p}{,}
+                                                  \PY{n}{config}\PY{o}{.}\PY{n}{max\PYZus{}grad\PYZus{}norm}\PY{p}{)}
+                \PY{n}{optimizer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{GradientDescentOptimizer}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lr}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}op} \PY{o}{=} \PY{n}{optimizer}\PY{o}{.}\PY{n}{apply\PYZus{}gradients}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{grads}\PY{p}{,} \PY{n}{tvars}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{assign\PYZus{}lr}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{session}\PY{p}{,} \PY{n}{lr\PYZus{}value}\PY{p}{)}\PY{p}{:}
+                \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lr}\PY{p}{,} \PY{n}{lr\PYZus{}value}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    에포크를 처리할 함수를 만듭니다.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{run\PYZus{}epoch}\PY{p}{(}\PY{n}{session}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{is\PYZus{}training}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Runs the model on the given data.\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{epoch\PYZus{}size} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{n}{m}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{n}{m}\PY{o}{.}\PY{n}{num\PYZus{}steps}
+            \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+            \PY{n}{costs} \PY{o}{=} \PY{l+m+mf}{0.0}
+            \PY{n}{iters} \PY{o}{=} \PY{l+m+mi}{0}
+            
+            \PY{n}{eval\PYZus{}op} \PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{train\PYZus{}op} \PY{k}{if} \PY{n}{is\PYZus{}training} \PY{k}{else} \PY{n}{tf}\PY{o}{.}\PY{n}{no\PYZus{}op}\PY{p}{(}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} initial\PYZus{}state는 2x20x200 크기의 튜플입니다.}
+            \PY{n}{state\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{c}\PY{p}{,} \PY{n}{h} \PY{o+ow}{in} \PY{n}{m}\PY{o}{.}\PY{n}{initial\PYZus{}state}\PY{p}{:}
+                \PY{n}{state\PYZus{}list}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{n}{c}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{h}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+            
+            \PY{n}{ptb\PYZus{}iter} \PY{o}{=} \PY{n}{reader}\PY{o}{.}\PY{n}{ptb\PYZus{}iterator}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{m}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{m}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{)}
+            \PY{k}{for} \PY{n}{step}\PY{p}{,} \PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{ptb\PYZus{}iter}\PY{p}{)}\PY{p}{:}
+                \PY{n}{fetch\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{m}\PY{o}{.}\PY{n}{cost}\PY{p}{]}
+                \PY{c+c1}{\PYZsh{} final\PYZus{}state 튜플에 담겨있는 상태를 꺼내어 fetch\PYZus{}list에 담습니다. }
+                \PY{k}{for} \PY{n}{c}\PY{p}{,} \PY{n}{h} \PY{o+ow}{in} \PY{n}{m}\PY{o}{.}\PY{n}{final\PYZus{}state}\PY{p}{:}
+                    \PY{n}{fetch\PYZus{}list}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{n}{c}\PY{p}{,} \PY{n}{h}\PY{p}{]}\PY{p}{)}
+                \PY{n}{fetch\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{eval\PYZus{}op}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} 이전 스텝에서 구해진 state\PYZus{}list가 feed\PYZus{}dict로 주입됩니다.}
+                \PY{n}{feed\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{m}\PY{o}{.}\PY{n}{input\PYZus{}data}\PY{p}{:} \PY{n}{x}\PY{p}{,} \PY{n}{m}\PY{o}{.}\PY{n}{targets}\PY{p}{:} \PY{n}{y}\PY{p}{\PYZcb{}}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{initial\PYZus{}state}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{c}\PY{p}{,} \PY{n}{h} \PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{initial\PYZus{}state}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                    \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{h}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{]}
+                
+                \PY{c+c1}{\PYZsh{} fetch\PYZus{}list에 담긴 final\PYZus{}state의 결과를 state\PYZus{}list로 전달 받습니다.}
+                \PY{n}{cost}\PY{p}{,} \PY{o}{*}\PY{n}{state\PYZus{}list}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{fetch\PYZus{}list}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{p}{)}
+        
+                \PY{n}{costs} \PY{o}{+}\PY{o}{=} \PY{n}{cost}
+                \PY{n}{iters} \PY{o}{+}\PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{num\PYZus{}steps}
+        
+                \PY{k}{if} \PY{n}{is\PYZus{}training} \PY{o+ow}{and} \PY{n}{step} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{epoch\PYZus{}size} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{10}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{10}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s2}{ perplexity: }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s2}{ speed: }\PY{l+s+si}{\PYZpc{}.0f}\PY{l+s+s2}{ wps}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}
+                            \PY{p}{(}\PY{n}{step} \PY{o}{*} \PY{l+m+mf}{1.0} \PY{o}{/} \PY{n}{epoch\PYZus{}size}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{costs} \PY{o}{/} \PY{n}{iters}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{iters} \PY{o}{*} \PY{n}{m}\PY{o}{.}\PY{n}{batch\PYZus{}size} \PY{o}{/} \PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{costs} \PY{o}{/} \PY{n}{iters}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{raw\PYZus{}data} \PY{o}{=} \PY{n}{reader}\PY{o}{.}\PY{n}{ptb\PYZus{}raw\PYZus{}data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{simple\PYZhy{}examples/data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{valid\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{raw\PYZus{}data}
+\end{Verbatim}
+
+
+    train\_data, valid\_data, test\_data 는 단어를 숫자로 바꾼
+리스트입니다.\\
+가장 많이 나온 단어 순으로 0번 부터 시작하여 10000번 까지의 번호를
+가지고 있습니다.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Graph}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{as\PYZus{}default}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{session}\PY{p}{:}
+            \PY{n}{initializer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}uniform\PYZus{}initializer}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{config}\PY{o}{.}\PY{n}{init\PYZus{}scale}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{init\PYZus{}scale}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} 학습과 검증, 테스트를 위한 모델을 만듭니다.}
+            \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{reuse}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{initializer}\PY{p}{)}\PY{p}{:}
+                \PY{n}{m} \PY{o}{=} \PY{n}{PTBModel}\PY{p}{(}\PY{n}{config}\PY{p}{,} \PY{n}{is\PYZus{}training}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+            \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{reuse}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{initializer}\PY{p}{)}\PY{p}{:}
+                \PY{n}{mvalid} \PY{o}{=} \PY{n}{PTBModel}\PY{p}{(}\PY{n}{config}\PY{p}{)}
+                \PY{n}{mtest} \PY{o}{=} \PY{n}{PTBModel}\PY{p}{(}\PY{n}{eval\PYZus{}config}\PY{p}{)}
+                
+            \PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{config}\PY{o}{.}\PY{n}{max\PYZus{}max\PYZus{}epoch}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} lr\PYZus{}decay는 반복속도를 조절해 주는 역할을 합니다.}
+                \PY{n}{lr\PYZus{}decay} \PY{o}{=} \PY{n}{config}\PY{o}{.}\PY{n}{lr\PYZus{}decay} \PY{o}{*}\PY{o}{*} \PY{n+nb}{max}\PY{p}{(}\PY{n}{i} \PY{o}{\PYZhy{}} \PY{n}{config}\PY{o}{.}\PY{n}{max\PYZus{}epoch}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{)}
+                \PY{n}{m}\PY{o}{.}\PY{n}{assign\PYZus{}lr}\PY{p}{(}\PY{n}{session}\PY{p}{,} \PY{n}{config}\PY{o}{.}\PY{n}{learning\PYZus{}rate} \PY{o}{*} \PY{n}{lr\PYZus{}decay}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Epoch: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ Learning rate: }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{session}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{lr}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                
+                \PY{n}{perplexity} \PY{o}{=} \PY{n}{run\PYZus{}epoch}\PY{p}{(}\PY{n}{session}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{is\PYZus{}training}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Epoch: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ Train Perplexity: }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{perplexity}\PY{p}{)}\PY{p}{)}
+        
+                \PY{n}{perplexity} \PY{o}{=} \PY{n}{run\PYZus{}epoch}\PY{p}{(}\PY{n}{session}\PY{p}{,} \PY{n}{mvalid}\PY{p}{,} \PY{n}{valid\PYZus{}data}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Epoch: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ Valid Perplexity: }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{perplexity}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{perplexity} \PY{o}{=} \PY{n}{run\PYZus{}epoch}\PY{p}{(}\PY{n}{session}\PY{p}{,} \PY{n}{mtest}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Perplexity: }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{perplexity}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch: 1 Learning rate: 1.000
+0.004 perplexity: 6685.388 speed: 10439 wps
+0.104 perplexity: 855.355 speed: 30747 wps
+0.204 perplexity: 632.011 speed: 32344 wps
+0.304 perplexity: 512.192 speed: 32846 wps
+0.404 perplexity: 442.185 speed: 33215 wps
+0.504 perplexity: 396.013 speed: 33633 wps
+0.604 perplexity: 356.742 speed: 33768 wps
+0.703 perplexity: 329.710 speed: 33943 wps
+0.803 perplexity: 308.098 speed: 34102 wps
+0.903 perplexity: 288.443 speed: 34175 wps
+Epoch: 1 Train Perplexity: 273.673
+Epoch: 1 Valid Perplexity: 180.655
+Epoch: 2 Learning rate: 1.000
+0.004 perplexity: 215.435 speed: 26923 wps
+0.104 perplexity: 153.011 speed: 34184 wps
+0.204 perplexity: 160.547 speed: 34347 wps
+0.304 perplexity: 155.215 speed: 34453 wps
+0.404 perplexity: 152.368 speed: 34525 wps
+0.504 perplexity: 149.943 speed: 34514 wps
+0.604 perplexity: 145.092 speed: 34553 wps
+0.703 perplexity: 142.850 speed: 34572 wps
+0.803 perplexity: 140.797 speed: 34568 wps
+0.903 perplexity: 137.107 speed: 34570 wps
+Epoch: 2 Train Perplexity: 134.985
+Epoch: 2 Valid Perplexity: 144.280
+Epoch: 3 Learning rate: 1.000
+0.004 perplexity: 146.746 speed: 27149 wps
+0.104 perplexity: 106.123 speed: 34289 wps
+0.204 perplexity: 115.437 speed: 34319 wps
+0.304 perplexity: 112.364 speed: 34487 wps
+0.404 perplexity: 111.484 speed: 34500 wps
+0.504 perplexity: 110.612 speed: 34427 wps
+0.604 perplexity: 107.910 speed: 34464 wps
+0.703 perplexity: 107.266 speed: 34473 wps
+0.803 perplexity: 106.619 speed: 34466 wps
+0.903 perplexity: 104.376 speed: 34555 wps
+Epoch: 3 Train Perplexity: 103.436
+Epoch: 3 Valid Perplexity: 131.806
+Epoch: 4 Learning rate: 1.000
+0.004 perplexity: 116.060 speed: 27552 wps
+0.104 perplexity: 85.617 speed: 34474 wps
+0.204 perplexity: 94.320 speed: 34506 wps
+0.304 perplexity: 91.957 speed: 34780 wps
+0.404 perplexity: 91.486 speed: 34801 wps
+0.504 perplexity: 91.162 speed: 34768 wps
+0.604 perplexity: 89.247 speed: 34692 wps
+0.703 perplexity: 89.041 speed: 34623 wps
+0.803 perplexity: 88.778 speed: 34620 wps
+0.903 perplexity: 87.145 speed: 34588 wps
+Epoch: 4 Train Perplexity: 86.610
+Epoch: 4 Valid Perplexity: 128.533
+Epoch: 5 Learning rate: 1.000
+0.004 perplexity: 100.688 speed: 27414 wps
+0.104 perplexity: 73.837 speed: 34426 wps
+0.204 perplexity: 81.489 speed: 34605 wps
+0.304 perplexity: 79.481 speed: 34610 wps
+0.404 perplexity: 79.299 speed: 34557 wps
+0.504 perplexity: 79.224 speed: 34571 wps
+0.604 perplexity: 77.716 speed: 34582 wps
+0.703 perplexity: 77.704 speed: 34573 wps
+0.803 perplexity: 77.667 speed: 34583 wps
+0.903 perplexity: 76.364 speed: 34529 wps
+Epoch: 5 Train Perplexity: 76.080
+Epoch: 5 Valid Perplexity: 126.970
+Epoch: 6 Learning rate: 0.500
+0.004 perplexity: 89.198 speed: 27743 wps
+0.104 perplexity: 64.318 speed: 34291 wps
+0.204 perplexity: 69.730 speed: 34232 wps
+0.304 perplexity: 66.992 speed: 34358 wps
+0.404 perplexity: 65.995 speed: 34493 wps
+0.504 perplexity: 65.184 speed: 34583 wps
+0.604 perplexity: 63.196 speed: 34591 wps
+0.703 perplexity: 62.514 speed: 34657 wps
+0.803 perplexity: 61.821 speed: 34686 wps
+0.903 perplexity: 60.114 speed: 34628 wps
+Epoch: 6 Train Perplexity: 59.276
+Epoch: 6 Valid Perplexity: 120.330
+Epoch: 7 Learning rate: 0.250
+0.004 perplexity: 72.626 speed: 27502 wps
+0.104 perplexity: 53.380 speed: 34316 wps
+0.204 perplexity: 58.024 speed: 34466 wps
+0.304 perplexity: 55.612 speed: 34437 wps
+0.404 perplexity: 54.716 speed: 34648 wps
+0.504 perplexity: 53.945 speed: 34601 wps
+0.604 perplexity: 52.177 speed: 34635 wps
+0.703 perplexity: 51.487 speed: 34603 wps
+0.803 perplexity: 50.767 speed: 34643 wps
+0.903 perplexity: 49.190 speed: 34596 wps
+Epoch: 7 Train Perplexity: 48.341
+Epoch: 7 Valid Perplexity: 120.190
+Epoch: 8 Learning rate: 0.125
+0.004 perplexity: 65.543 speed: 27432 wps
+0.104 perplexity: 47.453 speed: 34080 wps
+0.204 perplexity: 51.680 speed: 34388 wps
+0.304 perplexity: 49.513 speed: 34319 wps
+0.404 perplexity: 48.701 speed: 34482 wps
+0.504 perplexity: 47.972 speed: 34386 wps
+0.604 perplexity: 46.365 speed: 34403 wps
+0.703 perplexity: 45.689 speed: 34410 wps
+0.803 perplexity: 44.972 speed: 34337 wps
+0.903 perplexity: 43.500 speed: 34331 wps
+Epoch: 8 Train Perplexity: 42.684
+Epoch: 8 Valid Perplexity: 121.288
+Epoch: 9 Learning rate: 0.062
+0.004 perplexity: 61.437 speed: 26373 wps
+0.104 perplexity: 44.485 speed: 34209 wps
+0.204 perplexity: 48.501 speed: 34495 wps
+0.304 perplexity: 46.442 speed: 34366 wps
+0.404 perplexity: 45.684 speed: 34435 wps
+0.504 perplexity: 44.982 speed: 34473 wps
+0.604 perplexity: 43.449 speed: 34503 wps
+0.703 perplexity: 42.773 speed: 34497 wps
+0.803 perplexity: 42.061 speed: 34467 wps
+0.903 perplexity: 40.647 speed: 34477 wps
+Epoch: 9 Train Perplexity: 39.848
+Epoch: 9 Valid Perplexity: 121.955
+Epoch: 10 Learning rate: 0.031
+0.004 perplexity: 59.320 speed: 26870 wps
+0.104 perplexity: 42.941 speed: 33872 wps
+0.204 perplexity: 46.866 speed: 34041 wps
+0.304 perplexity: 44.850 speed: 34292 wps
+0.404 perplexity: 44.113 speed: 34353 wps
+0.504 perplexity: 43.438 speed: 34435 wps
+0.604 perplexity: 41.941 speed: 34441 wps
+0.703 perplexity: 41.265 speed: 34509 wps
+0.803 perplexity: 40.555 speed: 34543 wps
+0.903 perplexity: 39.177 speed: 34499 wps
+Epoch: 10 Train Perplexity: 38.389
+Epoch: 10 Valid Perplexity: 122.072
+Epoch: 11 Learning rate: 0.016
+0.004 perplexity: 58.273 speed: 26564 wps
+0.104 perplexity: 42.045 speed: 34259 wps
+0.204 perplexity: 45.907 speed: 34385 wps
+0.304 perplexity: 43.927 speed: 34231 wps
+0.404 perplexity: 43.203 speed: 34301 wps
+0.504 perplexity: 42.556 speed: 34383 wps
+0.604 perplexity: 41.088 speed: 34485 wps
+0.703 perplexity: 40.423 speed: 34563 wps
+0.803 perplexity: 39.717 speed: 34545 wps
+0.903 perplexity: 38.359 speed: 34490 wps
+Epoch: 11 Train Perplexity: 37.581
+Epoch: 11 Valid Perplexity: 121.889
+Epoch: 12 Learning rate: 0.008
+0.004 perplexity: 57.708 speed: 26921 wps
+0.104 perplexity: 41.536 speed: 34338 wps
+0.204 perplexity: 45.355 speed: 34320 wps
+0.304 perplexity: 43.393 speed: 34417 wps
+0.404 perplexity: 42.672 speed: 34573 wps
+0.504 perplexity: 42.042 speed: 34623 wps
+0.604 perplexity: 40.593 speed: 34660 wps
+0.703 perplexity: 39.940 speed: 34627 wps
+0.803 perplexity: 39.242 speed: 34619 wps
+0.903 perplexity: 37.893 speed: 34558 wps
+Epoch: 12 Train Perplexity: 37.122
+Epoch: 12 Valid Perplexity: 121.632
+Epoch: 13 Learning rate: 0.004
+0.004 perplexity: 57.345 speed: 27357 wps
+0.104 perplexity: 41.248 speed: 33864 wps
+0.204 perplexity: 45.046 speed: 34164 wps
+0.304 perplexity: 43.098 speed: 34407 wps
+0.404 perplexity: 42.382 speed: 34432 wps
+0.504 perplexity: 41.761 speed: 34517 wps
+0.604 perplexity: 40.320 speed: 34412 wps
+0.703 perplexity: 39.673 speed: 34435 wps
+0.803 perplexity: 38.982 speed: 34410 wps
+0.903 perplexity: 37.638 speed: 34461 wps
+Epoch: 13 Train Perplexity: 36.870
+Epoch: 13 Valid Perplexity: 121.394
+Test Perplexity: 117.247
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
